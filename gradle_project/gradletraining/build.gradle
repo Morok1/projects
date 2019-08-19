@@ -23,4 +23,26 @@ task hello {
         println 'tutorialspoint'
     }
 }
+tasks.create(name:'hello1')<<{
+    println "tutorialpoint"
+}
 
+
+task upper << {
+    String exp = 'tutorialpoint';
+    println "Original" + exp;
+
+}
+
+task count  << {
+    4.times{
+        print "$it"
+    }
+}
+
+task groovyJDK << {
+    String myName = "Marc";
+    myName.each(){
+        println("$it");
+    }
+}
