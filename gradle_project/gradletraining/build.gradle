@@ -14,35 +14,66 @@ repositories {
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
-task task1 << {
-    println 'compiling source'
-}
+
 
 task hello {
     doLast {
         println 'tutorialspoint'
     }
 }
-tasks.create(name:'hello1')<<{
-    println "tutorialpoint"
+
+
+//
+//task groovyJDK << {
+//    String myName = "Marc";
+//    myName.each(){
+//        println("$it");
+//    }
+//}
+//
+//project(':projectA') {
+//    task hello
+//}
+//
+task taskX {
+    doLast{println('TaskX')}
+
+
+
+}
+task taskY {
+    doLast{
+        println('TaskY')
+    }
+
+}
+
+task copy(type: Copy) {
+    description 'Copies the resource directory to the target directory.'
+    from 'resources'
+    into 'target'
+    include('**/*.txt', '**/*.xml', '**/*.properties')
+    println("description applied")
 }
 
 
-task upper << {
-    String exp = 'tutorialpoint';
-    println "Original" + exp;
-
-}
-
-task count  << {
-    4.times{
-        print "$it"
+task taskXX {
+    doLast{
+        println("task")
     }
 }
 
-task groovyJDK << {
-    String myName = "Marc";
-    myName.each(){
-        println("$it");
+taskXX.dependsOn {
+        tasks.findAll{task -> task.name.startsWith('lib')}
+}
+task lib {
+    doLast{
+        println("lib")
+    }
+}
+
+task lib1{
+    doLast{
+        println("lib1");
     }
 }
